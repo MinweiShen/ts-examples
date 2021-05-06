@@ -14,7 +14,7 @@ const a = new Params(1, 2, 3);
 
 
 /* you can create class using class express. 
-class express doesn't need a class name;
+class express doesn't need a class name
 */
 const someClass = class<T> {
   constructor(public v: T) {}
