@@ -36,6 +36,10 @@ class Point {
   */
   sum = () => this.x + this.y
 
+  minus() {
+    this.x - this.y
+  }
+
 }
 
 const point = new Point(1, 2);
