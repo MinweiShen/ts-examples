@@ -36,11 +36,15 @@ class Point {
   */
   sum = () => this.x + this.y
 
-  minus() {
+  // Note: this parameter is erased when compiled but it's used for type check
+  // the following code p1() will fail because this is global not Point
+  minus(this: Point) {
     this.x - this.y
   }
 
 }
 
 const point = new Point(1, 2);
+const p1 = point.minus
+p1();
 const point1 = new Point("1", "2")
