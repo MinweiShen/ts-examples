@@ -11,3 +11,4 @@ class MyClass {
 const myClass = new MyClass();
 myClass["a"] = true;
 console.log(myClass.check("a"))
+export {};

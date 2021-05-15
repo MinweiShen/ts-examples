@@ -8,3 +8,5 @@ interface Generic<T> {
 class G<T> {
   constructor(public value: T) {}
 }
+
+export {};

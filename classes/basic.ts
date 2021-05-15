@@ -47,4 +47,5 @@ class Point {
 const point = new Point(1, 2);
 const p1 = point.minus
 p1();
-const point1 = new Point("1", "2")
+const point1 = new Point("1", "2");
+export {};

@@ -70,3 +70,5 @@ class Dog extends Animal {
 const d = new Dog();
 d.move();
 d.woof(3);
+
+export {};

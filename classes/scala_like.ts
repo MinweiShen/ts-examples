@@ -21,3 +21,5 @@ const someClass = class<T> {
 }
 
 const sc = new someClass(1);
+
+export {};

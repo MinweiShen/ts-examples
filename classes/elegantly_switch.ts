@@ -36,3 +36,4 @@ handlers.set(Log, (m: Log) => console.log(`Log: ${m.log}`));
 
 const handle = handlers.get(value.constructor);
 (handle && handle(value));
+export {};

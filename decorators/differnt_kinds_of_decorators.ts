@@ -60,3 +60,4 @@ const ex = new Test()
 ex.method()
 ex.method1();
 Test.static_method();
+export {};

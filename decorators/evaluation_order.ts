@@ -27,3 +27,5 @@ class ExampleClass {
 
 const ex = new ExampleClass()
 ex.method()
+
+export {};

@@ -23,3 +23,4 @@ console.log(log)
 console.log(Object.getPrototypeOf(log))
 console.log(Object.getPrototypeOf(log) === Log.prototype)
 console.log(log.constructor)
+export {};

@@ -20,3 +20,5 @@ type NameOrId<T extends number | string> = T extends number
   let cb = createLabel(2.8);
     
   let cc = createLabel(Math.random() ? "hello" : 42);
+
+  export {};

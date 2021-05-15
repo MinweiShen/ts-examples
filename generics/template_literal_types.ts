@@ -15,4 +15,4 @@ const person = makeWatchedObject({
 person.on('firstNameChanged', (v: string) => {});
 person.on('firstChanged', (v: string) => {});
 
-export{}
+export {};

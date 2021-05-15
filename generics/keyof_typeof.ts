@@ -19,3 +19,5 @@ const MyArray = [
 
 // use number to get the type of an array’s elements
 type PersonInMyArray = typeof MyArray[number];
+
+export {};

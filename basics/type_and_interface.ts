@@ -84,3 +84,5 @@ function getArea(shape: Shape1) {
       return _exhaustiveCheck;
   }
 }
+
+export {};

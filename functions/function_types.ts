@@ -36,3 +36,5 @@ function lengthOf<T extends {length: number}>(arr: T): number {
   return arr.length;
 }
 
+export {};
+

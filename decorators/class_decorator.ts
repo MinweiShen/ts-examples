@@ -48,3 +48,4 @@ class Example {}
 const ex1 = new Example();
 ex1.report();
 
+export {};

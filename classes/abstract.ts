@@ -29,3 +29,4 @@ function fn1(cons: new () => Base) {
 }
 fn1(Base)
 fn1(Derived)
+export {};
