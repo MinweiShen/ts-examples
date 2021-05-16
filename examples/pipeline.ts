@@ -78,13 +78,15 @@ class ConvertToStringPipeline extends Pipeline<Done> {
   }
 }
 
+const data = [1,2,3,4];
+
 const pipelines1 = [new RemoveOddNumberPipeline(), new DoubleTheNumberPipeline(), new ConvertToStringPipeline()] as IPipeline<DataProcessed>[];
 const pipeline1 = pipelines1.reduce((prev, curr) => prev.pipe(curr));
-const data1 = [1,2,3,4];
-console.log((pipeline1.process({data: data1}) as Done).result);
+console.log((pipeline1.process({data}) as Done).result);
 
 const pipelines2 = [new RemoveOddNumberPipeline(), new MightEndEarlierPipeline(), new DoubleTheNumberPipeline(), new ConvertToStringPipeline()] as IPipeline<DataProcessed>[];
 const pipeline2 = pipelines2.reduce((prev, curr) => prev.pipe(curr));
-const data2 = [1,2,3,4];
-console.log((pipeline2.process({data: data2}) as Done).result);
+console.log((pipeline2.process({data}) as Done).result);
+
+
 export {}
