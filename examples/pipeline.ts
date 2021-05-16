@@ -20,58 +20,71 @@ function isUnderConstruction(data: DataProcessed): data is UnderConstruction {
   return (data as UnderConstruction).data !== undefined;
 } 
 
-interface IPipeline {
-  process(input: UnderConstruction): DataProcessed;
-  pipe(p: IPipeline): IPipeline;
+interface IPipeline<Out> {
+  process(input: UnderConstruction): Out;
+  pipe(p: IPipeline<DataProcessed>): IPipeline<DataProcessed>;
 }
 
-abstract class Pipeline implements IPipeline {
-  abstract process(input: UnderConstruction): DataProcessed;
+abstract class Pipeline<Out> implements IPipeline<Out> {
+  abstract process(input: UnderConstruction): Out;
 
-  pipe(p: IPipeline): IPipeline {
+  pipe(p: IPipeline<DataProcessed>): IPipeline<DataProcessed> {
     return new PipelineMerger(this, p);
   }
 }
 
-class PipelineMerger implements IPipeline{
-  constructor(private p1: IPipeline, private p2: IPipeline) {}
+class PipelineMerger implements IPipeline<DataProcessed>{
+  constructor(private p1: IPipeline<DataProcessed>, private p2: IPipeline<DataProcessed>) {}
   process(input: UnderConstruction): DataProcessed {
     const v1 = this.p1.process(input);
     if (isDone(v1)) return v1;
     return this.p2.process(v1 as UnderConstruction);
   }
 
-  pipe(p: IPipeline): IPipeline {
+  pipe(p: IPipeline<DataProcessed>): IPipeline<DataProcessed> {
     return new PipelineMerger(this, p);
   }
 }
 
-class RemoveOddNumberPipeline extends Pipeline {
-  process(input: UnderConstruction): UnderConstruction {
+class RemoveOddNumberPipeline extends Pipeline<UnderConstruction> {
+  process(input: UnderConstruction) {
     return {
       data: input.data.filter(d => d % 2 === 0)
     }
   }
 }
 
-class DoubleTheNumberPipeline extends Pipeline {
-  process(input: UnderConstruction): UnderConstruction {
+class DoubleTheNumberPipeline extends Pipeline<UnderConstruction> {
+  process(input: UnderConstruction) {
     return {
       data: input.data.map(d => d * 2)
     };
   }
 }
 
-class ConvertToStringPipeline extends Pipeline {
-  process(input: UnderConstruction): Done {
+class MightEndEarlierPipeline extends Pipeline<DataProcessed> {
+  process(input: UnderConstruction) {
+    return {
+      result: input.data.map(_ => "This ends earlier")
+    };
+  }
+}
+
+class ConvertToStringPipeline extends Pipeline<Done> {
+  process(input: UnderConstruction) {
     return {
       result: input.data.map(d => d.toString())
     };
   }
 }
 
-const pipelines = [new RemoveOddNumberPipeline(), new DoubleTheNumberPipeline(), new ConvertToStringPipeline()] as IPipeline[];
-const thePipeline = pipelines.reduce((prev, curr) => prev.pipe(curr));
-const data = [1,2,3,4];
-console.log((thePipeline.process({data}) as Done).result);
+const pipelines1 = [new RemoveOddNumberPipeline(), new DoubleTheNumberPipeline(), new ConvertToStringPipeline()] as IPipeline<DataProcessed>[];
+const pipeline1 = pipelines1.reduce((prev, curr) => prev.pipe(curr));
+const data1 = [1,2,3,4];
+console.log((pipeline1.process({data: data1}) as Done).result);
+
+const pipelines2 = [new RemoveOddNumberPipeline(), new MightEndEarlierPipeline(), new DoubleTheNumberPipeline(), new ConvertToStringPipeline()] as IPipeline<DataProcessed>[];
+const pipeline2 = pipelines2.reduce((prev, curr) => prev.pipe(curr));
+const data2 = [1,2,3,4];
+console.log((pipeline2.process({data: data2}) as Done).result);
 export {}
