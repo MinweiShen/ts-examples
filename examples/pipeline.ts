@@ -80,10 +80,12 @@ class ConvertToStringPipeline extends Pipeline<Done> {
 
 const data = [1,2,3,4];
 
+// A normal pipeline
 const pipelines1 = [new RemoveOddNumberPipeline(), new DoubleTheNumberPipeline(), new ConvertToStringPipeline()] as IPipeline<DataProcessed>[];
 const pipeline1 = pipelines1.reduce((prev, curr) => prev.pipe(curr));
 console.log((pipeline1.process({data}) as Done).result);
 
+// A pipeline that might end earlier
 const pipelines2 = [new RemoveOddNumberPipeline(), new MightEndEarlierPipeline(), new DoubleTheNumberPipeline(), new ConvertToStringPipeline()] as IPipeline<DataProcessed>[];
 const pipeline2 = pipelines2.reduce((prev, curr) => prev.pipe(curr));
 console.log((pipeline2.process({data}) as Done).result);
