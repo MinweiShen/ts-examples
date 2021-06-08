@@ -57,7 +57,7 @@ class Test {
 }
 
 const ex = new Test()
-ex.method()
+ex.method(1)
 ex.method1();
 Test.static_method();
 export {};

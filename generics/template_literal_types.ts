@@ -13,6 +13,7 @@ const person = makeWatchedObject({
 
 // type check!!!
 person.on('firstNameChanged', (v: string) => {});
-person.on('firstChanged', (v: string) => {});
+// the following one reports error
+// person.on('firstChanged', (v: string) => {});
 
 export {};

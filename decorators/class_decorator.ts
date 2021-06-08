@@ -29,10 +29,13 @@ const p = new mixed();
 p.value = 123;
 p.report();
 
-// The following code is not working!!!
-function class_decorator(target: Function) {
-  return class extends target {
-    constructor(...args: any[]) {
+interface Reportable {
+  report: () => void
+}
+
+function class_decorator<T extends (new (...args: any[]) => any)>(target: T) {
+  class Extended extends target implements Reportable {
+        constructor(...args: any[]) {
       super(...args);
     }
 
@@ -40,12 +43,16 @@ function class_decorator(target: Function) {
       console.log('report')
     }
   }
+
+  return Extended;
 }
+
+type R = ReturnType<typeof class_decorator>
 
 @class_decorator
 class Example {}
 
-const ex1 = new Example();
+const ex1 = new Example() as (R & Reportable);
 ex1.report();
 
 export {};

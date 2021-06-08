@@ -46,6 +46,7 @@ class Point {
 
 const point = new Point(1, 2);
 const p1 = point.minus
-p1();
+// the following code fails
+// p1();
 const point1 = new Point("1", "2");
 export {};

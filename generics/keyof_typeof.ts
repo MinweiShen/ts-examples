@@ -5,7 +5,7 @@ function f() {
   return { x: 10, y: 3 };
 }
 // this is wrong
-type P = ReturnType<f>;
+// type P = ReturnType<f>;
 
 // this is right
 type P1 = ReturnType<typeof f>

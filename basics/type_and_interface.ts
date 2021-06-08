@@ -79,6 +79,9 @@ function getArea(shape: Shape1) {
       return Math.PI * shape.radius ** 2;
     case "square":
       return shape.side ** 2;
+    case "rect":
+      // removing this case state will have compiler error
+      return 11;
     default:
       const _exhaustiveCheck: never = shape;
       return _exhaustiveCheck;
