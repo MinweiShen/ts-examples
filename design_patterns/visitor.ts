@@ -9,7 +9,7 @@ interface GEO {
 }
 
 /* by using accept and create different visitors
-we can easily add new functionalities to GEO;
+we can easily add new functionalities to GEO
 */
 
 class City implements GEO {
